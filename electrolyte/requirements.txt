@@ -1,5 +1,0 @@
-matplotlib
-torch
-numpy
-pandas
-rdkit-pypi

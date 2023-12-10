@@ -49,7 +49,7 @@ def make_training_predictions(data_path, model_path, gpu=False):
                 "--save_dir", f"{SAVEDIR}",
                 "--dataset_type", "regression",
                 "--metric", "mae",
-                "--outputmode", 'slimnet', #"slimnet",
+                "--outputmode", 'slimnet', #"arr",
                 "--quiet",
                 "--depth", "3",
                 "--dropout", "0.15",
@@ -80,7 +80,7 @@ def make_training_predictions(data_path, model_path, gpu=False):
                 "--test_path", f"{TRAIN_FULL}",
                 "--features_path", f"{TRAINFEATS_FULL}",
                 "--checkpoint_dir", f"{SAVEDIR}",
-                "--outputmode", "slimnet",
+                "--outputmode", "slimnet", #"arr",
                 "--preds_path", f"{PREDS}",
             ]
 
@@ -146,13 +146,13 @@ if __name__ == "__main__":
                         help='The model is trained on cuda enabled GPU, default false - training on CPU')
     args = parser.parse_args()
     
-    if 0:#args.make_data == "true":
+    if args.make_data == "true":
         print("Creating the cross validation data files for training!")
         make_balanced_data(DATADIR, f'{PATH_CHEM}/data/clean_train_data.csv') 
-    if 1:#args.train_predict == "true":
+    if args.train_predict == "true":
         print("Training loop begins!")
         make_training_predictions(DATADIR, MODELDIR, args.gpu==False)
-    if 1:#args.plot_parity == "true"
+    if args.plot_parity == "true":
         print("Plotting results")
         plot_parity(DATADIR)
         
