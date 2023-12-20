@@ -29,7 +29,7 @@ import seaborn as sns
 from matplotlib.offsetbox import AnchoredText
 from torch_geometric.data import Data
 import torch
-from slimnet_concat import SchNet
+from schnet_concat import SchNet
 from evaluation import ThreeDEvaluator
 from run import run
 from torch.utils.data import Subset

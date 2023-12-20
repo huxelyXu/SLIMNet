@@ -62,10 +62,10 @@ def make_training_predictions(data_path, model_path, gpu=False):
             ]
 
             
-            argument.append("--gpu")
-            argument.append("0")
+            # argument.append("--gpu")
+            # argument.append("0")
             # else:
-            # argument.append("--no_cuda")
+            argument.append("--no_cuda")
 
             train_args = TrainArgs().parse_args(argument)
             
@@ -136,9 +136,9 @@ def plot_parity(data_path):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Processing input parameters for cross validation training')
-    parser.add_argument('--make_data', choices=['true', 'false'], default='false',
+    parser.add_argument('--make_data', choices=['true', 'false'], default='true',
                         help='Determines whether the data should be generated or not')
-    parser.add_argument('--train_predict', choices=['true', 'false'], default='false',
+    parser.add_argument('--train_predict', choices=['true', 'false'], default='true',
                         help='Should the models be trained or not (takes couple of hours)')
     parser.add_argument('--plot_parity', choices=['true', 'false'], default='true',
                         help='Should the data be plotted, works only when data is made and predicted')

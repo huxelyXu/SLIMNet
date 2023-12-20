@@ -28,9 +28,9 @@ class GetLoader(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.data)
     
-class SoftNet(nn.Module):
+class SLIMNet(nn.Module):
     def __init__(self, output_channel=1):
-        super(SoftNet, self).__init__()
+        super(SLIMNet, self).__init__()
         self.out = output_channel
         self.monomer_1 = nn.Linear(167, 167)
         self.monomer_2 = nn.Linear(167, 167)
@@ -97,7 +97,7 @@ class SoftNet(nn.Module):
         return monomer_prop, torch.log(scal+1), torch.log(alpha), chain_order  
     
     
-def train_SoftNet(model, epochs, train_loader, test_loader, X_test, y_test, out = 1, lam = 10):
+def train_SLIMNet(model, epochs, train_loader, test_loader, X_test, y_test, out = 1, lam = 10):
     # criterion = nn.MSELoss()
     criterion = nn.SmoothL1Loss()
     optimizer = optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-5)
@@ -197,7 +197,7 @@ def train_SoftNet(model, epochs, train_loader, test_loader, X_test, y_test, out 
 
 if  __name__ == '__main__':
     out = 1
-    model = SoftNet(out)
+    model = SLIMNet(out)
     data = pd.read_csv('PI1070.csv')
     data = data.fillna(0)
     maccs = []
@@ -246,4 +246,4 @@ if  __name__ == '__main__':
     train_loader = torch.utils.data.DataLoader(train_data, batch_size=4, shuffle=True)
     test_loader = torch.utils.data.DataLoader(test_data, batch_size=100, shuffle=False)
     
-    train_SoftNet(model, 70000, train_loader, test_loader, X_test, y_test, out)
+    train_SLIMNet(model, 70000, train_loader, test_loader, X_test, y_test, out)

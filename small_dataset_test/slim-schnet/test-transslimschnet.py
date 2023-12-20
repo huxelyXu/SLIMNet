@@ -35,7 +35,7 @@ from evaluation import ThreeDEvaluator
 from run import run
 from torch.utils.data import Subset
 
-from slimnet import SchNet
+from schnet import SchNet
 
 data = torch.load('/mnt/workspace/xuhan/github-repo/chemprop-master/small_dataset_test/slim-schnet/data_polymer_scaled.pt')
 train_idx = np.load('/mnt/workspace/xuhan/github-repo/chemprop-master/small_dataset_test/slim-schnet/train_id.npy')
