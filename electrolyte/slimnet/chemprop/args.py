@@ -9,7 +9,9 @@ import torch
 from tap import Tap  # pip install typed-argument-parser (https://github.com/swansonk14/typed-argument-parser)
 
 # from .data import utils
-import chemprop.data.utils
+import sys
+sys.path.append('data')
+from .data import utils
 from .data import set_cache_mol
 from .features import get_available_features_generators
 

@@ -13,7 +13,7 @@ from .evaluate import evaluate, evaluate_predictions
 from .predict import predict
 from .train import train
 from ..args import TrainArgs
-from chemprop.constants import MODEL_FILE_NAME
+from ..constants import MODEL_FILE_NAME
 from ..data import get_class_sizes, get_data, MoleculeDataLoader, MoleculeDataset, set_cache_graph, split_data
 from ..models import MoleculeModel
 from ..nn_utils import param_count

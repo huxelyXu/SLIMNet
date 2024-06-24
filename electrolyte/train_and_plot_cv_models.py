@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import torch
 
-from slimnet.chemprop.args import TrainArgs, PredictArgs
+from chemproppred.args import TrainArgs, PredictArgs
 from slimnet.chemprop.train import cross_validate, run_training, make_predictions
 from chemproppred.utils import plot_hexbin
 from chemproppred.make_balanced_train import make_balanced_data
@@ -49,7 +49,7 @@ def make_training_predictions(data_path, model_path, gpu=False):
                 "--save_dir", f"{SAVEDIR}",
                 "--dataset_type", "regression",
                 "--metric", "mae",
-                "--outputmode", 'slimnet', #"arr",
+                "--outputmode", 'slimnet', #"slimnet", 'arr'
                 "--quiet",
                 "--depth", "3",
                 "--dropout", "0.15",
@@ -62,10 +62,10 @@ def make_training_predictions(data_path, model_path, gpu=False):
             ]
 
             
-            # argument.append("--gpu")
-            # argument.append("0")
+            argument.append("--gpu")
+            argument.append("0")
             # else:
-            argument.append("--no_cuda")
+            # argument.append("--no_cuda")
 
             train_args = TrainArgs().parse_args(argument)
             
@@ -80,7 +80,7 @@ def make_training_predictions(data_path, model_path, gpu=False):
                 "--test_path", f"{TRAIN_FULL}",
                 "--features_path", f"{TRAINFEATS_FULL}",
                 "--checkpoint_dir", f"{SAVEDIR}",
-                "--outputmode", "slimnet", #"arr",
+                "--outputmode", "slimnet",
                 "--preds_path", f"{PREDS}",
             ]
 
@@ -136,9 +136,9 @@ def plot_parity(data_path):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Processing input parameters for cross validation training')
-    parser.add_argument('--make_data', choices=['true', 'false'], default='true',
+    parser.add_argument('--make_data', choices=['true', 'false'], default='false',
                         help='Determines whether the data should be generated or not')
-    parser.add_argument('--train_predict', choices=['true', 'false'], default='true',
+    parser.add_argument('--train_predict', choices=['true', 'false'], default='false',
                         help='Should the models be trained or not (takes couple of hours)')
     parser.add_argument('--plot_parity', choices=['true', 'false'], default='true',
                         help='Should the data be plotted, works only when data is made and predicted')
@@ -146,13 +146,13 @@ if __name__ == "__main__":
                         help='The model is trained on cuda enabled GPU, default false - training on CPU')
     args = parser.parse_args()
     
-    if args.make_data == "true":
+    if 1:#args.make_data == "true":
         print("Creating the cross validation data files for training!")
         make_balanced_data(DATADIR, f'{PATH_CHEM}/data/clean_train_data.csv') 
-    if args.train_predict == "true":
+    if 1:#args.train_predict == "true":
         print("Training loop begins!")
         make_training_predictions(DATADIR, MODELDIR, args.gpu==False)
-    if args.plot_parity == "true":
+    if 1:#args.plot_parity == "true"
         print("Plotting results")
         plot_parity(DATADIR)
         

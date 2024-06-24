@@ -592,7 +592,7 @@ def fits_to_conds(preds, temps, outputmode):
         phi_theta = torch.FloatTensor(phi_theta).to(preds.device)
         m = nn.Softplus()
         mid = torch.pow(m(beta + 1e-6), m(gamma + 1e-6))
-        conds = torch.add(phi_theta, torch.mul(alpha, mid))
+        conds = torch.add(-phi_theta, torch.mul(alpha, mid))
         conds = conds.unsqueeze(1)
 
     elif outputmode=='vtf':
